@@ -7,6 +7,24 @@ from app.bullet import Bullet
 from app.alien import Alien
 
 
+def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
+    """Start a new game when the player clicks play"""
+    button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+
+    if button_clicked and not stats.game_active:
+        pygame.mouse.set_visible(False)
+        ai_settings.init_dynamic_settings()
+        stats.reset_stats()
+        stats.game_active = True
+        aliens.empty()
+        bullets.empty()
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
+    else:
+        stats.game_active = False
+        pygame.mouse.set_visible(True)
+
+
 # Event handling
 def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets):
     """Respond to keypresses and mouse events."""
@@ -22,24 +40,6 @@ def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets)
             check_keydown_events(event, ai_settings, stats, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
-
-
-def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
-    """Start a new game when the player clicks play"""
-    button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
-
-    if button_clicked and not stats.game_active:
-        pygame.mouse.set_visible(False)
-        ai_settings.initialize_dyanmic_settings()
-        stats.reset_stats()
-        stats.game_active = True
-        aliens.empty()
-        bullets.empty()
-        create_fleet(ai_settings, screen, ship, aliens)
-        ship.center_ship()
-    else:
-        stats.game_active = False
-        pygame.mouse.set_visible(True)
 
 
 def check_keydown_events(event, ai_settings, stats, screen, ship, bullets):
@@ -87,11 +87,19 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
             sb.prep_score()
+        check_high_score(stats, sb)
     if len(aliens) == 0:
         # Destroy existing bullets and create new fleet
         bullets.empty()
         ai_settings.increase_speed()
         create_fleet(ai_settings, screen, ship, aliens)
+
+
+def check_high_score(stats, sb):
+    """Check to see if there's a new high score"""
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()
 
 
 # Alien handling
