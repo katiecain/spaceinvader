@@ -99,7 +99,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens, 
         stats.level += 1
         sb.prep_level()
 
-        create_fleet(ai_settings, screen, ship, aliens)
+        create_fleet(ai_settings, screen, ship, aliens) 
 
 
 def check_high_score(stats, sb):
