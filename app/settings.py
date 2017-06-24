@@ -20,9 +20,11 @@ class Settings:
         self.alien_space = 1.5
         self.fleet_drop_speed = 10
 
+        # Score settings
+        self.alien_points = 10
+
         # Level up settings
         self.speedup_scale = 1.1
-
         self.init_dynamic_settings()
 
 
