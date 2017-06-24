@@ -18,7 +18,7 @@ class Settings:
 
         # Alien settings
         self.alien_space = 1.5
-        self.fleet_drop_speed = 70
+        self.fleet_drop_speed = 10
 
         # Level up settings
         self.speedup_scale = 1.1
