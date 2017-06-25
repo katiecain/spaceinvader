@@ -3,6 +3,7 @@ import sys
 import pygame
 
 import app.game_initialization as gi
+from app.bullet import Bullet
 
 
 # Event handling

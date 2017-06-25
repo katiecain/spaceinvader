@@ -3,6 +3,7 @@ from pygame.sprite import Group
 
 import app.game_rules as gr
 import app.game_controls as gc
+import app.game_initialization as gi
 from app.settings import Settings
 from app.ship import Ship
 from app.game_stats import GameStats
@@ -28,7 +29,7 @@ def run_game():
     aliens = Group()
     # alien = Alien(ai_settings, screen)
 
-    gr.create_fleet(ai_settings, screen, ship, aliens)
+    gi.create_fleet(ai_settings, screen, ship, aliens)
 
     # Start the main loop for the game
     while True:
