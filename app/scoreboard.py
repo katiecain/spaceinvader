@@ -18,10 +18,10 @@ class Scoreboard():
 
         self.prep_score()
         self.prep_high_score()
-
         self.prep_level()
-
         self.prep_ships()
+
+        self.reset_scoreboard()
 
     def prep_score(self):
         """Turn the score into a rendered image"""
@@ -66,3 +66,10 @@ class Scoreboard():
         self.screen.blit(self.high_score_image, self.high_score_rect)
         self.screen.blit(self.level_image, self.level_rect)
         self.ships.draw(self.screen)
+
+    def reset_scoreboard(self):
+        self.prep_score()
+        self.prep_high_score()
+        self.prep_level()
+        self.prep_ships()
+

@@ -3,6 +3,7 @@ import sys
 import pygame
 
 import app.game_functions as gf
+import app.game_initialization as gi
 
 
 # Event handling
@@ -14,7 +15,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if not stats.game_active:
-                gf.check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y)
+                gi.begin_game(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y)
         # Ship movement
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ai_settings, stats, screen, ship, bullets)
